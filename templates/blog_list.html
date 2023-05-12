@@ -1,9 +1,44 @@
-<h1>Blog List</h1>
+{% extends 'base.html' %} 
+
+{% block content %}
+<div
+  class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+>
+  <h1
+    class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
+  >
+    Blog List
+  </h1>
+
+  {% for post in posts %}
+  <a
+    class="mb-3 font-bold text-xl text-gray-700 dark:text-gray-400"
+    href="{% url 'blog:detail' post.id %}"
+  >
+    {{post.title}}
+  </a>
+  <br />
+  <br />
+  <a
+    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+    href="{% url 'blog:update' post.id %}"
+  >
+    Update
+  </a>
+  <a
+    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+    href="{% url 'blog:delete' post.id %}"
+  >
+    Delete
+  </a>
+  {% endfor %}
+  <br />
+</div>
 <br />
-{% for post in posts %}
-    <a href="{% url 'blog:detail' post.id %}"> {{post.title}} </a>
-    <a href="{% url 'blog:update' post.id %}"> Update </a>
-    <a href="{% url 'blog:delete' post.id %}"> Delete </a>
-{% endfor %}
-<br />
-<a href="{% url 'blog:create' %}">Create Post</a>
+<a
+  class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+  href="{% url 'blog:create' %}"
+>
+  Create Post
+</a>
+{% endblock content %}
